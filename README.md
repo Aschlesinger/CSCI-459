@@ -23,8 +23,8 @@ a database.
 
 This directory contains the files necessary to build the Dockerfile for pulling the webserver nginx.conf. also within this dirctory .....
 
-###docker/php-fpm
+### docker/php-fpm
 This directory contains the Dockerfile that pulls php and installs a driver to connect with the mariaDB database
 
-##src/
-This directory contains all of the code that builds the webpage. Including an index.php, css file, and a directory with two php files to further build the webpage. 
+### src/
+This directory contains all of the code that builds the webpage. Including an index.php, css file, and a directory with two php files to further build the webpage.
