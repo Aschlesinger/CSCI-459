@@ -1,30 +1,48 @@
 <?php
+require('./model/database.php');
 
-$db = new PDO('mysql:host=database;dbname=mydb;charset=utf8mb4', 'myuser', 'secret');
+$action = filter_input(INPUT_POST, 'action');
+if ($action === NULL) {
+    $action = filter_input(INPUT_GET, 'action');
+    if ($action === NULL) {
+        $action = 'list_students';
+    }
+}
+switch ($action){
+    case 'list_students':
+         // Get studnet data
+        $students = get_students();
 
-    $query = 'SELECT * FROM dockerSample';
-    $statement = $db->prepare($query);
-    $statement->execute();
-    $students = $statement->fetchAll();
-    $statement->closeCursor();
+        // Display the product list
+         include('studentList.php');
+         break;
+
+    case 'delete_student':
+        $studentID = filter_input(INPUT_POST, 'id');
+        delete_student($studentID);
+        header("Location: .");
+        break;
+
+
+    case 'show_add_form';
+        include('studentAdd.php');
+        break;
+
+    case 'add_student';
+        $id = filter_input(INPUT_POST, 'id');
+        $f_name = filter_input(INPUT_POST, 'f_name');
+        $l_name = filter_input(INPUT_POST, 'l_name');
+        // Validate the inputs
+        if ( $id === NULL || $f_name === NULL ||
+            $l_name === NULL) {
+            $error = "Invalid product data. Check all fields and try again.";
+            include('./view/error.php');
+        } else {
+            add_student($id, $f_name, $l_name);
+            header("Location: .");
+        break;
+    }
+
+}
+
 ?>
-<?php include 'view/header.php'; ?>
-    <main>
-        <h1>CofC Students</h1>
-	<table>
-		<tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-    </tr>
-       		 <?php foreach($students as $student): ?>
-			<tr>
-        <th><?php echo($student['id']); ?></th>
-        <th><?php echo($student['f_name']); ?></th>
-				<th><?php echo($student['l_name']); ?></th>
-
-			</tr>
-        	<?php endforeach; ?>
-      </table>
-    </main>
-<?php include 'view/footer.php'; ?>
