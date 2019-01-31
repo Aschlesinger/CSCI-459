@@ -12,5 +12,5 @@
 <body>
 <header>
     <h1>CSCI 459</h1>
-    <p>Assignment 1 - Alexander Schlesinger</p>
+    <p>Assignment 2 - Alexander Schlesinger</p>
 </header>
