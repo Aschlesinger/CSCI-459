@@ -1,4 +1,6 @@
 # Assignment 2 - Alexander Schlesinger
+#CSCI 459
+#2/5/2019
 
 ## STARTING UP
 - To start up the three Docker container that make up this application simply  follow these few steps:
